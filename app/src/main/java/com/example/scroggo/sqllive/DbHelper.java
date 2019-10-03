@@ -7,7 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
-    private static final int VERSION = 1;
+    // VERSION 2 adds the appearance table
+    private static final int VERSION = 3;
     private static final String NAME = "characters.db";
 
     public DbHelper(@Nullable Context context) {
@@ -18,12 +19,20 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(
                 CharactersContract.CharactersTable.CREATE_TABLE);
+        sqLiteDatabase.execSQL(
+                CharactersContract.AppearanceTable.CREATE_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+        if (oldVersion < 2) {
+            sqLiteDatabase.execSQL(CharactersContract.AppearanceTable.CREATE_TABLE);
+            return;
+        }
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "
                 + CharactersContract.CharactersTable.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "
+                + CharactersContract.AppearanceTable.TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
 }
