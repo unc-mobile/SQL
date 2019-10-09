@@ -25,7 +25,8 @@ public class CharactersContract {
 
         public static final String CREATE_TABLE = "CREATE TABLE "
                 + TABLE_NAME + " ("
-                + _ID + " INTEGER PRIMARY KEY, "
+                // Remove this for now. We need to change our queries to account for this.
+                //+ _ID + " INTEGER PRIMARY KEY, "
                 + COLUMN_NAME_EPISODE + " INTEGER, "
                 + COLUMN_NAME_CHARACTER_ID + " INTEGER, "
                 + COLUMN_NAME_APPEARED + " INTEGER)";

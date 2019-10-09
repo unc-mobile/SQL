@@ -8,7 +8,9 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     // VERSION 2 adds the appearance table
-    private static final int VERSION = 3;
+    // VERSION 3 adds the _ID column to the AppearanceTable
+    // VERSION 4 removes it, since we need to change our query to support it
+    private static final int VERSION = 4;
     private static final String NAME = "characters.db";
 
     public DbHelper(@Nullable Context context) {
